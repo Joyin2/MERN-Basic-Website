@@ -1,9 +1,8 @@
 const express = require("express");
-
+require("./db/config");
+const User = require("./db/Users")
 const app = express();
 
-app.get("/",(req, res)=>{
-    res.send("app is running...")
-});
+app.post()
 
-app.listen(5000)
+app.listen(5000);
