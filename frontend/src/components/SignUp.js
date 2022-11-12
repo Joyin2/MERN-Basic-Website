@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"
 import "./SignUp.css";
 
 
@@ -6,6 +7,7 @@ const SignUp = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const navigate = useNavigate();
   const collectData = async () => {
     console.warn(name, email, password);
     let result = await fetch("http://localhost:4200/register",{
@@ -17,6 +19,11 @@ const SignUp = () => {
     });
     result = await result.json()
       console.warn(result);
+      localStorage.setItem("users",JSON.stringify(result));
+      if(result){
+        navigate('/');
+      };
+      
   };
 
   return (
