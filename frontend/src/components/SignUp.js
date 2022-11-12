@@ -1,12 +1,22 @@
 import React, { useState } from "react";
 import "./SignUp.css";
 
+
 const SignUp = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const collectData = () => {
+  const collectData = async () => {
     console.warn(name, email, password);
+    let result = await fetch("http://localhost:4200/register",{
+      method:"post",
+      body: JSON.stringify({name, email, password}),
+      headers:{
+        "Content-Type":"application/json"
+      },
+    });
+    result = await result.json()
+      console.warn(result);
   };
 
   return (
@@ -28,7 +38,7 @@ const SignUp = () => {
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        placeholder="setPassword"
+        placeholder="Password"
       />
       <input onClick={collectData} type="submit" value="Submit" />
     </div>
